@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from data_api.data.blueprint import data_bp
+from data_api.data import api
 
 # Create instance for flask SQL extension, not yet attached to application
 db = SQLAlchemy()
