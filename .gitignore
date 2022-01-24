@@ -1,0 +1,6 @@
+# Specify filepatterns you want git to ignore.
+.idea/
+data_api/__pycache__/
+tests/__pycache__/
+tests/functional/__pycache__/
+tests/unit/__pycache__/
