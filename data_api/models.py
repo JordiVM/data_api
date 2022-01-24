@@ -42,4 +42,4 @@ class Conversation:
         """
         Add message to conversation
         """
-        self.messages.append(Message)
+        self.messages.append(message)
