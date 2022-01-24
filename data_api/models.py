@@ -37,3 +37,9 @@ class Conversation:
         self.customer_id = customer_id
         self.dialog_id = dialog_id
         self.messages = []
+
+    def add_message(self, message: Message):
+        """
+        Add message to conversation
+        """
+        self.messages.append(Message)
