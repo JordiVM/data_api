@@ -7,9 +7,25 @@ def test_home_page():
     WHEN the '/' page is requested (GET)
     THEN check that the response is valid
     """
-    flask_app = create_app("flask_test.cfg")
+    app = create_app("flask_test.cfg")
 
     # Create a test client using the Flask application configured for testing
-    with flask_app.test_client() as test_client:
+    with app.test_client() as test_client:
         response = test_client.get("/")
         assert response.status_code == 404
+
+
+def test_post_message():
+    """
+    GIVEN a Flask application configured for testing
+    WHEN the '/data/<customer_id>/<dialog_id>' page receive data (POST)
+    THEN check that the response is valid and message is stored in db
+    """
+    app = create_app("flask_test.cfg")
+
+    # Create a test client using the Flask application configured for testing
+    with app.test_client() as test_client:
+        post_path = "/data/2/3"
+        data = {"text": "Some example text", "language": "EN"}
+        response = test_client.post(post_path, data=data)
+        assert response.status_code == 200
