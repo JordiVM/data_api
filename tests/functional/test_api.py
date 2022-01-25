@@ -1,4 +1,5 @@
 from data_api import create_app
+from data_api.data.api import conversationPool
 
 
 def test_home_page():
@@ -25,7 +26,9 @@ def test_post_message():
 
     # Create a test client using the Flask application configured for testing
     with app.test_client() as test_client:
-        post_path = "/data/2/3"
+        post_path = "/data/0/1"
         data = {"text": "Some example text", "language": "EN"}
         response = test_client.post(post_path, data=data)
         assert response.status_code == 200
+        assert conversationPool[1].messages[-1].text == "Some example text"
+        assert conversationPool[1].messages[-1].language == "EN"
