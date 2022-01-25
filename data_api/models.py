@@ -1,4 +1,5 @@
 from datetime import datetime
+from data_api import db
 
 
 class Message:
@@ -14,7 +15,7 @@ class Message:
         """
         Create a new Message object using language and text
         """
-        self.timestamp = datetime.timestamp(datetime.now())
+        self.timestamp = datetime.now()
         self.language = language
         self.text = text
 
@@ -43,3 +44,17 @@ class Conversation:
         Add message to conversation
         """
         self.messages.append(message)
+
+
+class MessageEntry(db.Model):
+    """
+    Class to represent a message entry in the db
+    """
+
+    __tablename__ = "MESSAGE_ENTRIES"
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime)
+    customer_id = db.Column(db.Integer)
+    dialog_id = db.Column(db.Integer)
+    text = db.Column(db.String(200))
+    language = db.Column(db.String(50))
