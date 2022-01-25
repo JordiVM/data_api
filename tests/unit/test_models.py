@@ -23,3 +23,16 @@ def test_new_Conversation():
     assert conversation.customer_id == 2
     assert conversation.dialog_id == 10
     assert conversation.messages == []
+
+
+def test_add_message():
+    """
+    GIVEN a Conversation model
+    WHEN a new message is added
+    THEN check message is added at the end of the list
+    """
+    conversation = Conversation(2, 10)
+    message = Message("EN", "Some text to verify")
+    conversation.add_message(message)
+    assert conversation.messages[-1].text == "Some text to verify"
+    assert conversation.messages[-1].language == "EN"
