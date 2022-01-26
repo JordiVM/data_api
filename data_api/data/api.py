@@ -41,3 +41,19 @@ def post_consent(dialog_id: int):
     conversationPool[dialog_id] = None
 
     return "", 200
+
+
+@data_bp.route("/data/", methods=["GET"])
+def get_messages():
+    language = request.args.get("language")
+    customer_id = request.args.get("customerId")
+
+    result = (
+        db.session.query(MessageEntry)
+        .filter_by(language=language, customer_id=customer_id)
+        .all()
+    )
+
+    print(result)
+
+    return "", 200
