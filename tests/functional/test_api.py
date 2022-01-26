@@ -44,10 +44,32 @@ def test_post_consent_true():
 
     # Create a test client using the Flask application configured for testing
     with app.test_client() as test_client:
-        post_path = "/data/0/1"
+        post_path = "/data/0/2"
         data = {"text": "Some example text", "language": "EN"}
         response = test_client.post(post_path, data=data)
-        post_path = "/consents/1"
+        post_path = "/consents/2"
         data = {"consent": "true"}
         response = test_client.post(post_path, data=data)
         assert response.status_code == 200
+
+
+def test_get_data():
+    """
+    GIVEN a Flask application configured for testing
+    WHEN '/data/?language=:language|customerId=:customerId' is requested (GET)
+    THEN check that the response is valid and data is retrieved from db
+    """
+    app = create_app("flask_test.cfg")
+
+    # Create a test client using the Flask application configured for testing
+    with app.test_client() as test_client:
+        post_path = "/data/0/3"
+        data = {"text": "Some example text", "language": "EN"}
+        response = test_client.post(post_path, data=data)
+        post_path = "/consents/3"
+        data = {"consent": "true"}
+        response = test_client.post(post_path, data=data)
+        post_path = "/data/?language=EN"
+        response = test_client.get(post_path)
+        assert response.status_code == 200
+        assert response.data.decode("UTF-8") == ""
