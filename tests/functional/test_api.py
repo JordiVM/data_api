@@ -72,6 +72,38 @@ def test_post_consent_true():
         assert query.language == random_language
 
 
+def test_post_consent_false():
+    """
+    GIVEN a Flask application configured for testing
+    WHEN the '/consent/<dialog_id>' page receive data (POST) with payload false
+    THEN check that the response is valid and data NOT stored in db
+    """
+    app = create_app("flask_test.cfg")
+
+    # Create a test client using the Flask application configured for testing
+    with app.test_client() as test_client:
+        dialog_id = 5
+        post_path = "/data/0/" + str(dialog_id)
+        random_text = random_string(50)
+        random_language = random_string()
+        data = {"text": random_text, "language": random_language}
+        response = test_client.post(post_path, data=data)
+        post_path = "/consents/" + str(dialog_id)
+        data = {"consent": "false"}
+        response = test_client.post(post_path, data=data)
+        assert response.status_code == 200
+
+        # Query db to make sure the conversation has been stored
+        query = (
+            db.session.query(MessageEntry)
+            .order_by(MessageEntry.date)
+            .filter((MessageEntry.language == random_language))
+            .all()
+        )
+
+        assert query == []
+
+
 def test_get_data_language():
     """
     GIVEN a Flask application configured for testing
