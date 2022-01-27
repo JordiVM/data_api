@@ -58,3 +58,15 @@ class MessageEntry(db.Model):
     dialog_id = db.Column(db.Integer)
     text = db.Column(db.String(200))
     language = db.Column(db.String(50))
+
+    def serialize(self):
+        """
+        Converts instance MessageEntry to serializable dict
+        """
+        return {
+            "date": str(self.date),
+            "customer_id": self.customer_id,
+            "dialog_id": self.dialog_id,
+            "text": self.text,
+            "language": self.language,
+        }
