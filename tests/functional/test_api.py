@@ -161,7 +161,7 @@ def test_get_data_customer_id():
 def test_get_data_bad_request():
     """
     GIVEN a Flask application configured for testing
-    WHEN '/data/?something=:something' is requested (GET)
+    WHEN '/data/?something=:something' is requested (GET) Bad Request
     THEN check that the response is 400 invalid
     """
     app = create_app("flask_test.cfg")
