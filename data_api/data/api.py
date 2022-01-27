@@ -2,10 +2,11 @@ from flask import request
 from collections import defaultdict
 
 from data_api.models import Message, Conversation, MessageEntry
-from data_api.data.blueprint import data_bp
+from data_api.data import data_bp
 from data_api import db
 
 # Hashtable {key=dialogID, value=Conversation}
+# Assumes dialogID is unique for all conversations
 conversationPool = defaultdict(Conversation)
 
 

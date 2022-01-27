@@ -1,9 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from data_api.data.blueprint import data_bp
-
-# from data_api.data import api
 
 # Create instance for flask SQL extension, not yet attached to application
 db = SQLAlchemy()
@@ -24,4 +21,6 @@ def initialize_extensions(app):
 
 
 def register_blueprint(app):
+    from data_api.data import data_bp
+
     app.register_blueprint(data_bp)
