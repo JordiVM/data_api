@@ -1,5 +1,6 @@
 from flask import request
 from collections import defaultdict
+import json
 
 from data_api.models import Message, Conversation, MessageEntry
 from data_api.data import data_bp
@@ -75,4 +76,4 @@ def get_messages():
         return "", 200
 
     # Returns query results in list[json]
-    return "", 200
+    return json.dumps(dict_result), 200
